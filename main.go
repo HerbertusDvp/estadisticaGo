@@ -6,12 +6,8 @@ import (
 
 func main() {
 
-	fmt.Println("Media de datos: ")
+	media := MediaDatos(9, 6, 5, 8, 10)
 
-	Muestra("Hola juan")
-
-	//media := mediaDatos(2.0, 5.0)
-
-	//fmt.Println(media)
+	fmt.Println("resultado: ", media)
 
 }

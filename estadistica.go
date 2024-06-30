@@ -1,8 +1,6 @@
 package main
 
-import "fmt"
-
-func mediaDatos(datos ...float64) float64 {
+func MediaDatos(datos ...float64) float64 {
 	if len(datos) == 0 {
 		return 0
 	}
@@ -14,10 +12,5 @@ func mediaDatos(datos ...float64) float64 {
 	}
 
 	return suma / float64(len(datos))
-
-}
-
-func Muestra(mensaje string) {
-	fmt.Println(mensaje)
 
 }
