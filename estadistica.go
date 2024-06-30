@@ -1,5 +1,7 @@
 package main
 
+import "sort"
+
 func MediaDatos(datos ...float64) float64 {
 	if len(datos) == 0 {
 		return 0
@@ -12,7 +14,6 @@ func MediaDatos(datos ...float64) float64 {
 }
 
 func MediaSlice(datos []float64) float64 {
-
 	if len(datos) == 0 {
 		return 0
 	}
@@ -25,7 +26,7 @@ func MediaSlice(datos []float64) float64 {
 }
 
 func MedianaDatos(datos ...float64) float64 {
-
+	sort.Float64s(datos)
 	size := len(datos)
 	indice := int(size / 2)
 
@@ -40,6 +41,7 @@ func MedianaDatos(datos ...float64) float64 {
 }
 
 func MedianaSlice(datos []float64) float64 {
+	sort.Float64s(datos)
 	size := len(datos)
 	indice := int(size / 2)
 
@@ -52,3 +54,16 @@ func MedianaSlice(datos []float64) float64 {
 		return datos[indice]
 	}
 }
+
+/*
+func ModaDatos(datos []float64) float64 {
+
+	valores := map[int]int{}
+
+	for index, dato := range datos {
+
+	}
+
+	return 0
+}
+*/
