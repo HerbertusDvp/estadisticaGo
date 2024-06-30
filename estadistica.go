@@ -32,7 +32,20 @@ func MedianaDatos(datos ...float64) float64 {
 	if size == 0 {
 		return 0
 	}
+	if size%2 == 0 {
+		return (datos[indice] + datos[indice-1]) / 2
+	} else {
+		return datos[indice]
+	}
+}
 
+func MedianaSlice(datos []float64) float64 {
+	size := len(datos)
+	indice := int(size / 2)
+
+	if size == 0 {
+		return 0
+	}
 	if size%2 == 0 {
 		return (datos[indice] + datos[indice-1]) / 2
 	} else {
