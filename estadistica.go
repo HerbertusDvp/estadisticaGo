@@ -1,6 +1,9 @@
 package main
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 func MediaDatos(datos ...float64) float64 {
 	if len(datos) == 0 {
@@ -55,15 +58,59 @@ func MedianaSlice(datos []float64) float64 {
 	}
 }
 
-/*
-func ModaDatos(datos []float64) float64 {
+func ModaDatos(datos ...float64) []float64 {
 
-	valores := map[int]int{}
+	valores := getDatosUnicos(datos)
+	multimoda := MapMaxDato(valores)
 
-	for index, dato := range datos {
+	return multimoda
+}
 
+func getDatosUnicos(datos []float64) map[float64]int {
+	valores := map[float64]int{}
+	existe := false
+
+	if !(len(datos) > 0) {
+		return valores
 	}
 
-	return 0
+	for _, dato := range datos {
+
+		if len(valores) > 0 {
+			for key, _ := range valores {
+				if key == dato {
+					existe = true
+				}
+			}
+
+			if existe {
+				valores[dato] = valores[dato] + 1
+			} else {
+				valores[dato] = 1
+			}
+
+		} else {
+			valores[dato] = 1
+		}
+	}
+	return valores
 }
-*/
+
+func MapMaxDato(datos map[float64]int) []float64 {
+	fmt.Println(datos)
+	maxFrec := 0
+	modaSlice := []float64{}
+	if len(datos) > 0 {
+		for key, frecuencia := range datos {
+			if maxFrec < frecuencia {
+				maxFrec = datos[key]
+			}
+		}
+		for key, frec := range datos {
+			if frec == maxFrec {
+				modaSlice = append(modaSlice, key)
+			}
+		}
+	}
+	return modaSlice
+}
