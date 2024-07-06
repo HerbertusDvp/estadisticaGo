@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"sort"
 )
 
@@ -113,4 +114,27 @@ func MapMaxDato(datos map[float64]int) []float64 {
 		}
 	}
 	return modaSlice
+}
+
+// funciones par mdedidas de dispersión
+
+func Rango(datos []float64) float64 {
+	sort.Float64s(datos)
+
+	if len(datos) > 1 {
+		return datos[len(datos)-1] - datos[0]
+	}
+	return 0
+}
+
+func VarianzaSlice(datos []float64, nDigitos float64) float64 {
+	media := MediaSlice(datos)
+
+	suma := 0.0
+
+	for _, v := range datos {
+		suma += math.Pow(v-media, 2)
+	}
+	resultado := suma / float64(len(datos))
+	return Redondea(resultado, nDigitos)
 }
