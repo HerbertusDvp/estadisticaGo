@@ -1,23 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"math"
 	"sort"
 )
 
-func MediaDatos(datos ...float64) float64 {
-	if len(datos) == 0 {
-		return 0
-	}
-	suma := 0.0
-	for _, dato := range datos {
-		suma += dato
-	}
-	return suma / float64(len(datos))
-}
-
-func MediaSlice(datos []float64) float64 {
+func Media(datos []float64, nDigitos float64) float64 {
 	if len(datos) == 0 {
 		return 0
 	}
@@ -26,10 +14,10 @@ func MediaSlice(datos []float64) float64 {
 	for _, dato := range datos {
 		suma += dato
 	}
-	return suma / float64(len(datos))
+	return Redondea(suma/float64(len(datos)), nDigitos)
 }
 
-func MedianaDatos(datos ...float64) float64 {
+func Mediana(datos []float64) float64 {
 	sort.Float64s(datos)
 	size := len(datos)
 	indice := int(size / 2)
@@ -44,22 +32,7 @@ func MedianaDatos(datos ...float64) float64 {
 	}
 }
 
-func MedianaSlice(datos []float64) float64 {
-	sort.Float64s(datos)
-	size := len(datos)
-	indice := int(size / 2)
-
-	if size == 0 {
-		return 0
-	}
-	if size%2 == 0 {
-		return (datos[indice] + datos[indice-1]) / 2
-	} else {
-		return datos[indice]
-	}
-}
-
-func ModaDatos(datos ...float64) []float64 {
+func Moda(datos []float64) []float64 {
 
 	valores := getDatosUnicos(datos)
 	multimoda := MapMaxDato(valores)
@@ -98,7 +71,6 @@ func getDatosUnicos(datos []float64) map[float64]int {
 }
 
 func MapMaxDato(datos map[float64]int) []float64 {
-	fmt.Println(datos)
 	maxFrec := 0
 	modaSlice := []float64{}
 	if len(datos) > 0 {
@@ -116,25 +88,23 @@ func MapMaxDato(datos map[float64]int) []float64 {
 	return modaSlice
 }
 
-// funciones par mdedidas de dispersión
-
-func Rango(datos []float64) float64 {
+func Dispersion(datos []float64, nDigitos float64) []float64 {
 	sort.Float64s(datos)
+	resultado := []float64{0, 0, 0, 0}
 
-	if len(datos) > 1 {
-		return datos[len(datos)-1] - datos[0]
+	if len(datos) < 2 {
+		return resultado
 	}
-	return 0
-}
 
-func VarianzaSlice(datos []float64, nDigitos float64) float64 {
-	media := MediaSlice(datos)
-
+	media := Media(datos, nDigitos)
 	suma := 0.0
-
 	for _, v := range datos {
 		suma += math.Pow(v-media, 2)
 	}
-	resultado := suma / float64(len(datos))
-	return Redondea(resultado, nDigitos)
+	resultado[0] = datos[len(datos)-1] - datos[0]        // Rango
+	resultado[1] = Redondea(suma/float64(len(datos)), 2) // Varianza
+	resultado[2] = Redondea(math.Sqrt(resultado[1]), 2)  //Desviacion estándar
+	resultado[3] = Redondea(resultado[2]/media, 2)       //Coeficiente de varacion
+
+	return resultado
 }
