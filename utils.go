@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-func MaxOfSlice(datos []float64) float64 {
+func Max(datos []float64) float64 {
 	sort.Float64s(datos)
 
 	if len(datos) > 0 {
@@ -15,7 +15,7 @@ func MaxOfSlice(datos []float64) float64 {
 	return 0
 }
 
-func MinOfSlice(datos []float64) float64 {
+func Min(datos []float64) float64 {
 	sort.Float64s(datos)
 
 	if len(datos) > 0 {

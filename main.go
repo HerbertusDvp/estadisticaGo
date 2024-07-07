@@ -6,11 +6,10 @@ import (
 
 func main() {
 
-	//datos := []float64{9, 7, 5, 8, 10}
+	datos := []float64{9, 7, 5, 8, 9, 8, 10, 5, 5}
 
-	//media := MedianaSlice(datos)
-	moda := ModaDatos(9, 7, 5, 8, 9, 8, 10, 5, 5)
+	fmt.Println(Media(datos, 2), Mediana(datos), Moda(datos))
 
-	fmt.Println("Mediana: ", moda)
+	fmt.Println("Dispersion: ", Dispersion(datos, 2))
 
 }
