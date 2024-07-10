@@ -51,7 +51,7 @@ func getDatosUnicos(datos []float64) map[float64]int {
 	for _, dato := range datos {
 
 		if len(valores) > 0 {
-			for key, _ := range valores {
+			for key := range valores {
 				if key == dato {
 					existe = true
 				}

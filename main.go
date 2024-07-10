@@ -3,10 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	file := "datos.csv"
-	datos := LeerCSV(file)
-	datosN := MatrizStringToFloat64(datos)
-	fmt.Println(datosN)
-	fmt.Println("Min y max: ", MinMaxMatriz(datosN))
+
+	datos := []float64{6, 8, 9, 5, 4, 7, 9, 3, 1, 2, 8, 9}
+	fmt.Println(Moda(datos))
 
 }

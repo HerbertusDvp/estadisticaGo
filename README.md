@@ -1,4 +1,18 @@
 ## Iniciando en Go
 
 Starting Go ...
-Wait for more statitics
+
+Medidas estadísticas
+
+Mediadas de tendencia central
+
++Media
++Mediana
++Moda
+
+Medidas de disperesión
+
++Rango
++Varianza
++Desviación estándar
++Coeficiente de variación
