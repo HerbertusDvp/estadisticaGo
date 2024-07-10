@@ -6,6 +6,7 @@ import (
 	"math"
 	"os"
 	"sort"
+	"strconv"
 )
 
 func Max(datos []float64) float64 {
@@ -36,8 +37,8 @@ func Redondea(numero float64, digitos float64) float64 {
 	return resultado
 }
 
-func LeerCSV() [][]string {
-	f, err := os.Open("datos.csv")
+func LeerCSV(file string) [][]string {
+	f, err := os.Open(file)
 
 	if err != nil {
 		fmt.Println("Error al abrir el archivo: ", err)
@@ -54,4 +55,49 @@ func LeerCSV() [][]string {
 		fmt.Println("Error al leer el leer los datos")
 	}
 	return datos
+}
+
+func MatrizStringToFloat64(datos [][]string) [][]float64 {
+
+	matriz := [][]float64{}
+	fila := []float64{}
+
+	for i := 0; i < len(datos); i++ {
+		for j := 0; j < len(datos[0]); j++ {
+			aux, err := strconv.ParseFloat(datos[i][j], 64)
+			if err != nil {
+				fmt.Println("Error de convetsion con el dato: ", err)
+			}
+			fila = append(fila, aux)
+			aux = 0.0
+		}
+		matriz = append(matriz, fila)
+		fila = []float64{}
+	}
+	return matriz
+}
+
+func MinMaxMatriz(datos [][]float64) []float64 {
+
+	res := []float64{0.0, 0.0}
+
+	for i := 0; i < len(datos); i++ {
+		for j := 0; j < len(datos[0]); j++ {
+
+			aux := datos[i][j]
+
+			if i == 0 && j == 0 {
+				res[0] = aux
+				res[1] = aux
+			} else {
+				if res[0] > aux {
+					res[0] = aux
+				}
+				if res[1] < aux {
+					res[1] = aux
+				}
+			}
+		}
+	}
+	return res
 }

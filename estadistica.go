@@ -108,3 +108,7 @@ func Dispersion(datos []float64, nDigitos float64) []float64 {
 
 	return resultado
 }
+
+func TablaFrecuencias(datos [][]string) {
+
+}
