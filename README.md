@@ -1,10 +1,8 @@
 ## Iniciando en Go
 
-Starting Go ...
+Medidas estadísticas - Contenido
 
-Medidas estadísticas
-
-Mediadas de tendencia central
+Medidas de tendencia central
 
 +Media
 +Mediana
@@ -16,3 +14,5 @@ Medidas de disperesión
 +Varianza
 +Desviación estándar
 +Coeficiente de variación
+
+Tabla de frecuencias para datos agrupados

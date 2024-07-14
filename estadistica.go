@@ -108,3 +108,52 @@ func Dispersion(datos []float64, nDigitos float64) []float64 {
 
 	return resultado
 }
+
+func TablaFrecuenciasAgrupados(datos [][]float64) [][]float64 {
+
+	tabla := [][]float64{}
+	clase := []float64{}
+
+	minmax := MinMaxMatriz(datos)
+
+	rango := minmax[1] - minmax[0]
+	n := float64(NumeroDeDatos(datos)) // Numero de datos
+	clases := 1 + 3.322 + math.Log10(n)
+	k := Sturges(clases) // Numero de intervalos
+	A := rango / float64(k)
+	A = math.Ceil(A) //Amplitud de clase
+	f := 0.0
+
+	limiteI := minmax[0]
+	limiteS := 0.0
+
+	for i := 0; i < k; i++ {
+		limiteS = limiteI + A
+
+		clase = append(clase, limiteI)
+		clase = append(clase, limiteS)
+		clase = append(clase, (limiteI+limiteS)/2)
+
+		for i := 0; i < len(datos); i++ {
+			for j := 0; j < len(datos[i]); j++ {
+				if datos[i][j] >= limiteI && datos[i][j] < limiteS {
+					f += 1
+				}
+			}
+		}
+
+		clase = append(clase, f)
+		if i == 0 {
+			clase = append(clase, f)
+		} else {
+			clase = append(clase, f+tabla[i-1][4])
+		}
+
+		tabla = append(tabla, clase)
+		clase = []float64{}
+		limiteI = limiteS
+		f = 0
+	}
+
+	return tabla
+}

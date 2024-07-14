@@ -4,7 +4,13 @@ import "fmt"
 
 func main() {
 
-	datos := []float64{6, 8, 9, 5, 4, 7, 9, 3, 1, 2, 8, 9}
-	fmt.Println(Moda(datos))
+	datos := LeerCSV("datos2.csv")
+	matriz := MatrizStringToFloat64(datos)
+
+	//fmt.Println(matriz)
+
+	tabla := TablaFrecuenciasAgrupados(matriz)
+
+	fmt.Println(tabla)
 
 }

@@ -63,7 +63,7 @@ func MatrizStringToFloat64(datos [][]string) [][]float64 {
 	fila := []float64{}
 
 	for i := 0; i < len(datos); i++ {
-		for j := 0; j < len(datos[0]); j++ {
+		for j := 0; j < len(datos[i]); j++ {
 			aux, err := strconv.ParseFloat(datos[i][j], 64)
 			if err != nil {
 				fmt.Println("Error de convetsion con el dato: ", err)
@@ -82,7 +82,7 @@ func MinMaxMatriz(datos [][]float64) []float64 {
 	res := []float64{0.0, 0.0}
 
 	for i := 0; i < len(datos); i++ {
-		for j := 0; j < len(datos[0]); j++ {
+		for j := 0; j < len(datos[i]); j++ {
 
 			aux := datos[i][j]
 
@@ -100,4 +100,24 @@ func MinMaxMatriz(datos [][]float64) []float64 {
 		}
 	}
 	return res
+}
+
+func Sturges(numero float64) int {
+	aux := int(numero - (numero - math.Floor(numero)))
+
+	if aux%2 == 0 {
+		return aux + 1
+	}
+	return aux
+}
+
+func NumeroDeDatos(datos [][]float64) int {
+	n := 0
+
+	for i := 0; i < len(datos); i++ {
+		for j := 0; j < len(datos[i]); j++ {
+			n += 1
+		}
+	}
+	return n
 }
