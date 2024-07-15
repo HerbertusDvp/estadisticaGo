@@ -16,3 +16,5 @@ Medidas de disperesión
 +Coeficiente de variación
 
 Tabla de frecuencias para datos agrupados
++Medidas de TC
++Medidas de dispersión

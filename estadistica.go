@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"sort"
 )
@@ -156,4 +157,78 @@ func TablaFrecuenciasAgrupados(datos [][]float64) [][]float64 {
 	}
 
 	return tabla
+}
+
+func MediaTabla(tabla [][]float64) float64 {
+
+	fx := 0.0
+
+	for i := 0; i < len(tabla); i++ {
+		fx += tabla[i][2] * tabla[i][3]
+	}
+	n := tabla[len(tabla)-1][4]
+	media := fx / float64(n)
+
+	return media
+}
+
+func MedianaTabla(tabla [][]float64) float64 {
+
+	n := tabla[len(tabla)-1][4]
+	n2 := float64(n) / 2
+	fila := 0
+	mediana := 0.0
+
+	for k, v := range tabla {
+		fila = k
+		if n2 < v[4] {
+			break
+		}
+	}
+	a := tabla[0][1] - tabla[0][0]
+	mediana = tabla[fila][0] + ((n2-tabla[fila-1][4])/tabla[fila][3])*a
+
+	mediana = Redondea(mediana, 2)
+	return mediana
+}
+
+func ModaTabla(tabla [][]float64) {
+	fila := 0
+	aux := 0.0
+	a := tabla[0][1] - tabla[0][0]
+
+	for k, v := range tabla {
+		if aux < v[3] {
+			aux = v[3]
+			fila = k
+		}
+	}
+	resta1 := tabla[fila][3] - tabla[fila-1][3]
+	resta2 := tabla[fila][3] - tabla[fila+1][3]
+	moda := tabla[fila][0] + (resta1/(resta1+resta2))*a
+
+	moda = Redondea(moda, 2)
+	fmt.Println(moda)
+}
+
+func DispersionTabla(tabla [][]float64) []float64 {
+
+	dispersion := []float64{}
+	media := MediaTabla(tabla)
+	sum := 0.0
+
+	for _, v := range tabla {
+		sum += math.Pow(v[2]-media, 2)
+	}
+
+	varianza := sum / tabla[len(tabla)-1][4]
+	varianza = Redondea(varianza, 2)
+	desviacionE := Redondea(math.Sqrt(varianza), 2)
+	cv := Redondea(desviacionE/media, 2)
+
+	dispersion = append(dispersion, varianza)
+	dispersion = append(dispersion, desviacionE)
+	dispersion = append(dispersion, cv)
+
+	return dispersion
 }

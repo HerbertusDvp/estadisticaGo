@@ -121,3 +121,11 @@ func NumeroDeDatos(datos [][]float64) int {
 	}
 	return n
 }
+
+func PrintTabla(tabla [][]float64) {
+
+	for _, v := range tabla {
+		fmt.Println(v)
+	}
+	fmt.Println()
+}
