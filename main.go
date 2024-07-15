@@ -7,10 +7,10 @@ func main() {
 	datos := LeerCSV("datos2.csv")
 	matriz := MatrizStringToFloat64(datos)
 
-	//fmt.Println(matriz)
-
 	tabla := TablaFrecuenciasAgrupados(matriz)
 
-	fmt.Println(tabla)
+	PrintTabla(tabla)
+
+	fmt.Println(DispersionTabla(tabla))
 
 }
