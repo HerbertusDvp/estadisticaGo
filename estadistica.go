@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 	"sort"
 )
@@ -167,7 +166,7 @@ func MediaTabla(tabla [][]float64) float64 {
 		fx += tabla[i][2] * tabla[i][3]
 	}
 	n := tabla[len(tabla)-1][4]
-	media := fx / float64(n)
+	media := Redondea(fx/float64(n), 2)
 
 	return media
 }
@@ -192,23 +191,46 @@ func MedianaTabla(tabla [][]float64) float64 {
 	return mediana
 }
 
-func ModaTabla(tabla [][]float64) {
-	fila := 0
-	aux := 0.0
+func ModaTabla(tabla [][]float64) []float64 {
+	resultado := []float64{}
+	multimoda := []int{}
+	frec := 0.0
 	a := tabla[0][1] - tabla[0][0]
 
-	for k, v := range tabla {
-		if aux < v[3] {
-			aux = v[3]
-			fila = k
+	for _, v := range tabla {
+		if frec < v[3] {
+			frec = v[3]
 		}
 	}
-	resta1 := tabla[fila][3] - tabla[fila-1][3]
-	resta2 := tabla[fila][3] - tabla[fila+1][3]
-	moda := tabla[fila][0] + (resta1/(resta1+resta2))*a
 
-	moda = Redondea(moda, 2)
-	fmt.Println(moda)
+	for k, v := range tabla {
+		if frec == v[3] {
+			multimoda = append(multimoda, k)
+		}
+	}
+
+	for _, v := range multimoda {
+
+		sustraendo1 := 0.0
+		sustraendo2 := 0.0
+
+		if v > 0 {
+			sustraendo1 = tabla[v-1][3]
+		}
+		if v < len(tabla)-1 {
+			sustraendo2 = tabla[v+1][3]
+		}
+
+		resta1 := tabla[v][3] - sustraendo1
+		resta2 := tabla[v][3] - sustraendo2
+		moda := tabla[v][0] + (resta1/(resta1+resta2))*a
+
+		moda = Redondea(moda, 2)
+		resultado = append(resultado, moda)
+
+	}
+
+	return resultado
 }
 
 func DispersionTabla(tabla [][]float64) []float64 {
